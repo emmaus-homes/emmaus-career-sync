@@ -1,0 +1,13 @@
+{
+  "name": "paycom-scraper",
+  "version": "1.0.0",
+  "description": "Scrapes Paycom careers portal and updates JSONbin",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "scrape": "node index.js"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
+  }
+}
