@@ -29,16 +29,24 @@ function inferDepartment(title) {
 }
 
 function parseJobType(text) {
-  const types = ['Full-Time/Part-Time', 'Full-Time', 'Part-Time', 'Contract', 'PRN'];
-  for (const type of types) {
-    if (text.includes(type)) return type;
+  // Check for combined type first
+  if (text.includes('Full-Time/Part-Time') || text.includes('Full Time/Part Time')) {
+    return 'Full-Time/Part-Time';
   }
+  if (text.includes('Part-Time') || text.includes('Part Time')) {
+    return 'Part-Time';
+  }
+  if (text.includes('Full-Time') || text.includes('Full Time')) {
+    return 'Full-Time';
+  }
+  if (text.includes('Contract')) return 'Contract';
+  if (text.includes('PRN')) return 'PRN';
   return 'Full-Time';
 }
 
 function parseLocation(text) {
-  // Match "City, ST" or "City, ST 12345" pattern
-  const match = text.match(/([A-Z][a-zA-Z\s]+),\s*([A-Z]{2})(?:\s+\d{5})?/);
+  // Match "St. Charles, MO 63301" or "City, ST 12345" pattern
+  const match = text.match(/([A-Z][a-zA-Z.\s]+),\s*([A-Z]{2})(?:\s+\d{5})?/);
   if (match) {
     return `${match[1].trim()}, ${match[2]}`;
   }
@@ -103,138 +111,123 @@ async function scrapePaycom() {
     // Wait a bit more for any lazy-loaded content
     await page.waitForTimeout(2000);
 
-    // Debug: Log page info
+    // Debug: Take screenshot
     console.log('Page loaded. Taking screenshot for debugging...');
     await page.screenshot({ path: 'debug-screenshot.png', fullPage: true });
 
-    // Debug: Count all job links
-    const allLinks = await page.$$eval('a[href*="/jobs/"]', links => links.map(l => l.href));
-    console.log(`Found ${allLinks.length} total job links on page`);
-    console.log('Job links:', [...new Set(allLinks)]);
-
-    // Extract job data - look for job cards more specifically
+    // Extract job data by clicking into each job detail page
     console.log('Extracting job data...');
-    const jobs = await page.evaluate(() => {
-      const jobsData = [];
-      const seenIds = new Set();
 
-      // Try multiple selectors to find job cards
-      // Look for links that go to job detail pages
-      const jobLinks = document.querySelectorAll('a[href*="/jobs/"]');
-
-      console.log('Total links found:', jobLinks.length);
-
-      jobLinks.forEach((link, index) => {
-        const href = link.getAttribute('href');
-        const idMatch = href.match(/\/jobs\/(\d+)/);
-        if (!idMatch) return;
-
-        const paycomId = idMatch[1];
-
-        // Skip duplicates
-        if (seenIds.has(paycomId)) {
-          console.log(`Skipping duplicate: ${paycomId}`);
-          return;
-        }
-        seenIds.add(paycomId);
-
-        // Find the job card container - walk up the DOM to find a meaningful container
-        let container = link;
-        let attempts = 0;
-        while (container.parentElement && attempts < 5) {
-          const parent = container.parentElement;
-          // Stop if we find a list item, article, or div with job-related class
-          if (parent.tagName === 'LI' ||
-              parent.tagName === 'ARTICLE' ||
-              parent.className?.includes('job') ||
-              parent.className?.includes('card') ||
-              parent.className?.includes('posting') ||
-              parent.className?.includes('position')) {
-            container = parent;
-            break;
-          }
-          container = parent;
-          attempts++;
-        }
-
-        const fullText = container.innerText || link.innerText || '';
-
-        // Debug: log what we found
-        console.log(`Job ${index}: ID=${paycomId}, Text preview: ${fullText.slice(0, 100)}...`);
-
-        jobsData.push({
-          paycomId,
-          fullText: fullText.trim(),
-          href
-        });
+    // First, get all unique job IDs from the page
+    const jobIds = await page.evaluate(() => {
+      const links = document.querySelectorAll('a[href*="/jobs/"]');
+      const ids = new Set();
+      links.forEach(link => {
+        const match = link.href.match(/\/jobs\/(\d+)/);
+        if (match) ids.add(match[1]);
       });
-
-      return jobsData;
+      return [...ids];
     });
 
-    console.log(`Found ${jobs.length} unique job listings`);
+    console.log(`Found ${jobIds.length} unique job IDs: ${jobIds.join(', ')}`);
 
-    // Debug: Show all jobs found
-    jobs.forEach((job, i) => {
-      console.log(`\n--- Job ${i + 1} ---`);
-      console.log(`ID: ${job.paycomId}`);
-      console.log(`Text: ${job.fullText.slice(0, 200)}...`);
-    });
+    const jobs = [];
 
-    // Process extracted data
-    const processedJobs = jobs.map(job => {
-      const { paycomId, fullText } = job;
+    // Visit each job detail page to get accurate data
+    for (const jobId of jobIds) {
+      const jobUrl = `https://www.paycomonline.net/v4/ats/web.php/portal/${PAYCOM_CLIENT_KEY}/jobs/${jobId}`;
+      console.log(`\nFetching job ${jobId}...`);
 
-      // Parse the text blob
-      const reqId = parseReqId(fullText);
-      const lines = fullText.split('\n').map(l => l.trim()).filter(l => l);
-      const titleLine = lines[0] || '';
-      const title = cleanTitle(titleLine);
-      const type = parseJobType(fullText);
-      const location = parseLocation(fullText);
-      const salary = parseSalary(fullText);
-      const department = inferDepartment(title);
+      try {
+        await page.goto(jobUrl, { waitUntil: 'networkidle', timeout: 30000 });
+        await page.waitForTimeout(1500); // Wait for React to render
 
-      // Try to extract a summary (usually after the header info)
-      let summary = '';
-      const summaryStart = fullText.toLowerCase().indexOf('job summary');
-      if (summaryStart > -1) {
-        const afterSummary = fullText.slice(summaryStart + 11).trim();
-        const firstSentence = afterSummary.match(/^[^.!?]+[.!?]/);
-        summary = firstSentence ? firstSentence[0].trim() : afterSummary.slice(0, 200);
-      } else {
-        // Take text after location/type info as summary
-        const textParts = fullText.split(/(?:Full-Time|Part-Time|Contract|PRN)/i);
-        if (textParts.length > 1) {
-          const afterType = textParts[textParts.length - 1].trim();
-          // Remove location and salary, get remaining text
-          const cleaned = afterType
-            .replace(/[A-Z][a-zA-Z\s]+,\s*[A-Z]{2}(?:\s+\d{5})?/, '')
-            .replace(/\$[\d,.]+\s*(?:\/|\s)?(?:hr|yr)\.?/gi, '')
-            .trim();
-          if (cleaned.length > 20) {
-            summary = cleaned.slice(0, 250);
+        // Extract job details from the detail page
+        const jobData = await page.evaluate(() => {
+          const getText = (selector) => {
+            const el = document.querySelector(selector);
+            return el ? el.innerText.trim() : '';
+          };
+
+          // Get all text content from the page
+          const bodyText = document.body.innerText;
+
+          // Try to find the job title - usually in an h1 or prominent heading
+          let title = '';
+          const h1 = document.querySelector('h1');
+          const h2 = document.querySelector('h2');
+          if (h1) title = h1.innerText.trim();
+          else if (h2) title = h2.innerText.trim();
+
+          // If no title found, look for text with req ID pattern
+          if (!title) {
+            const titleMatch = bodyText.match(/([A-Za-z\s\-\/]+)\s*\(\d{4,6}\)/);
+            if (titleMatch) title = titleMatch[0];
           }
-        }
-      }
 
-      return {
-        id: `EH-${paycomId}`,
-        paycomId,
-        reqId,
-        title,
-        department,
-        location,
-        type,
-        schedule: '',
-        posted: new Date().toISOString().split('T')[0],
-        featured: false,
-        summary: summary.slice(0, 250),
-        description: '',
-        salary,
-        applyUrl: `https://www.paycomonline.net/v4/ats/web.php/portal/${PAYCOM_CLIENT_KEY}/jobs/${paycomId}`
-      };
-    });
+          return {
+            title,
+            bodyText: bodyText.slice(0, 2000), // First 2000 chars for parsing
+          };
+        });
+
+        // Parse the extracted data
+        const { title: rawTitle, bodyText } = jobData;
+        const reqId = parseReqId(rawTitle) || parseReqId(bodyText);
+        const title = cleanTitle(rawTitle) || `Job ${jobId}`;
+        const location = parseLocation(bodyText);
+        const jobType = parseJobType(bodyText);
+        const salary = parseSalary(bodyText);
+
+        // Extract summary - look for "Job Summary" section
+        let summary = '';
+        const summaryMatch = bodyText.match(/Job Summary[:\s]*([^]*?)(?:Qualifications|Requirements|About|Benefits|$)/i);
+        if (summaryMatch) {
+          summary = summaryMatch[1].trim().slice(0, 250);
+        }
+
+        console.log(`  Title: ${title}`);
+        console.log(`  Location: ${location}`);
+        console.log(`  Type: ${jobType}`);
+
+        jobs.push({
+          paycomId: jobId,
+          reqId,
+          title,
+          location,
+          type: jobType,
+          salary,
+          summary,
+          bodyText
+        });
+
+      } catch (err) {
+        console.log(`  Error fetching job ${jobId}: ${err.message}`);
+      }
+    }
+
+    // Go back to main page for final screenshot
+    await page.goto(PAYCOM_URL, { waitUntil: 'networkidle', timeout: 30000 });
+
+    console.log(`\nSuccessfully extracted ${jobs.length} jobs`);
+
+    // Process into final format
+    const processedJobs = jobs.map(job => ({
+      id: `EH-${job.paycomId}`,
+      paycomId: job.paycomId,
+      reqId: job.reqId,
+      title: job.title,
+      department: inferDepartment(job.title),
+      location: job.location,
+      type: job.type,
+      schedule: '',
+      posted: new Date().toISOString().split('T')[0],
+      featured: false,
+      summary: job.summary,
+      description: '',
+      salary: job.salary,
+      applyUrl: `https://www.paycomonline.net/v4/ats/web.php/portal/${PAYCOM_CLIENT_KEY}/jobs/${job.paycomId}`
+    }));
 
     await browser.close();
     return processedJobs;
@@ -394,6 +387,50 @@ async function main() {
     console.error('\n❌ Scraper failed:', error.message);
     process.exit(1);
   }
+}
+
+// Helper functions need to be available in page.evaluate context
+function parseReqId(text) {
+  const match = text.match(/\((\d{4,6})\)/);
+  return match ? match[1] : '';
+}
+
+function cleanTitle(title) {
+  return title.replace(/\s*\(\d{4,6}\)\s*/, '').trim();
+}
+
+function parseLocation(text) {
+  const match = text.match(/([A-Z][a-zA-Z.\s]+),\s*([A-Z]{2})(?:\s+\d{5})?/);
+  if (match) {
+    return `${match[1].trim()}, ${match[2]}`;
+  }
+  return '';
+}
+
+function parseJobType(text) {
+  if (text.includes('Full-Time/Part-Time') || text.includes('Full Time/Part Time')) {
+    return 'Full-Time/Part-Time';
+  }
+  if (text.includes('Part-Time') || text.includes('Part Time')) {
+    return 'Part-Time';
+  }
+  if (text.includes('Full-Time') || text.includes('Full Time')) {
+    return 'Full-Time';
+  }
+  if (text.includes('Contract')) return 'Contract';
+  if (text.includes('PRN')) return 'PRN';
+  return 'Full-Time';
+}
+
+function parseSalary(text) {
+  const hourlyMatch = text.match(/\$[\d,.]+\s*(?:\/|\s)?hr\.?/i);
+  const yearlyMatch = text.match(/\$[\d,]+\s*(?:\/|\s)?yr\.?/i);
+  const rangeMatch = text.match(/\$[\d,.]+\s*[-–—]\s*\$[\d,.]+/);
+
+  if (rangeMatch) return rangeMatch[0].replace(/\s+/g, ' ');
+  if (hourlyMatch) return hourlyMatch[0].replace(/\s+/g, '');
+  if (yearlyMatch) return yearlyMatch[0].replace(/\s+/g, '');
+  return '';
 }
 
 main();
