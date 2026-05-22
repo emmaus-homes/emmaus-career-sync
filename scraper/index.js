@@ -103,25 +103,64 @@ async function scrapePaycom() {
     // Wait a bit more for any lazy-loaded content
     await page.waitForTimeout(2000);
 
-    // Extract job data
+    // Debug: Log page info
+    console.log('Page loaded. Taking screenshot for debugging...');
+    await page.screenshot({ path: 'debug-screenshot.png', fullPage: true });
+
+    // Debug: Count all job links
+    const allLinks = await page.$$eval('a[href*="/jobs/"]', links => links.map(l => l.href));
+    console.log(`Found ${allLinks.length} total job links on page`);
+    console.log('Job links:', [...new Set(allLinks)]);
+
+    // Extract job data - look for job cards more specifically
     console.log('Extracting job data...');
-    const jobs = await page.evaluate((clientKey) => {
-      const jobLinks = document.querySelectorAll('a[href*="/jobs/"]');
+    const jobs = await page.evaluate(() => {
       const jobsData = [];
       const seenIds = new Set();
 
-      jobLinks.forEach(link => {
+      // Try multiple selectors to find job cards
+      // Look for links that go to job detail pages
+      const jobLinks = document.querySelectorAll('a[href*="/jobs/"]');
+
+      console.log('Total links found:', jobLinks.length);
+
+      jobLinks.forEach((link, index) => {
         const href = link.getAttribute('href');
         const idMatch = href.match(/\/jobs\/(\d+)/);
         if (!idMatch) return;
 
         const paycomId = idMatch[1];
-        if (seenIds.has(paycomId)) return;
+
+        // Skip duplicates
+        if (seenIds.has(paycomId)) {
+          console.log(`Skipping duplicate: ${paycomId}`);
+          return;
+        }
         seenIds.add(paycomId);
 
-        // Get the full text content of the job card
-        const container = link.closest('[class*="job"]') || link.parentElement?.parentElement || link;
+        // Find the job card container - walk up the DOM to find a meaningful container
+        let container = link;
+        let attempts = 0;
+        while (container.parentElement && attempts < 5) {
+          const parent = container.parentElement;
+          // Stop if we find a list item, article, or div with job-related class
+          if (parent.tagName === 'LI' ||
+              parent.tagName === 'ARTICLE' ||
+              parent.className?.includes('job') ||
+              parent.className?.includes('card') ||
+              parent.className?.includes('posting') ||
+              parent.className?.includes('position')) {
+            container = parent;
+            break;
+          }
+          container = parent;
+          attempts++;
+        }
+
         const fullText = container.innerText || link.innerText || '';
+
+        // Debug: log what we found
+        console.log(`Job ${index}: ID=${paycomId}, Text preview: ${fullText.slice(0, 100)}...`);
 
         jobsData.push({
           paycomId,
@@ -131,9 +170,16 @@ async function scrapePaycom() {
       });
 
       return jobsData;
-    }, PAYCOM_CLIENT_KEY);
+    });
 
-    console.log(`Found ${jobs.length} job listings`);
+    console.log(`Found ${jobs.length} unique job listings`);
+
+    // Debug: Show all jobs found
+    jobs.forEach((job, i) => {
+      console.log(`\n--- Job ${i + 1} ---`);
+      console.log(`ID: ${job.paycomId}`);
+      console.log(`Text: ${job.fullText.slice(0, 200)}...`);
+    });
 
     // Process extracted data
     const processedJobs = jobs.map(job => {
