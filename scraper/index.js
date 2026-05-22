@@ -389,48 +389,4 @@ async function main() {
   }
 }
 
-// Helper functions need to be available in page.evaluate context
-function parseReqId(text) {
-  const match = text.match(/\((\d{4,6})\)/);
-  return match ? match[1] : '';
-}
-
-function cleanTitle(title) {
-  return title.replace(/\s*\(\d{4,6}\)\s*/, '').trim();
-}
-
-function parseLocation(text) {
-  const match = text.match(/([A-Z][a-zA-Z.\s]+),\s*([A-Z]{2})(?:\s+\d{5})?/);
-  if (match) {
-    return `${match[1].trim()}, ${match[2]}`;
-  }
-  return '';
-}
-
-function parseJobType(text) {
-  if (text.includes('Full-Time/Part-Time') || text.includes('Full Time/Part Time')) {
-    return 'Full-Time/Part-Time';
-  }
-  if (text.includes('Part-Time') || text.includes('Part Time')) {
-    return 'Part-Time';
-  }
-  if (text.includes('Full-Time') || text.includes('Full Time')) {
-    return 'Full-Time';
-  }
-  if (text.includes('Contract')) return 'Contract';
-  if (text.includes('PRN')) return 'PRN';
-  return 'Full-Time';
-}
-
-function parseSalary(text) {
-  const hourlyMatch = text.match(/\$[\d,.]+\s*(?:\/|\s)?hr\.?/i);
-  const yearlyMatch = text.match(/\$[\d,]+\s*(?:\/|\s)?yr\.?/i);
-  const rangeMatch = text.match(/\$[\d,.]+\s*[-–—]\s*\$[\d,.]+/);
-
-  if (rangeMatch) return rangeMatch[0].replace(/\s+/g, ' ');
-  if (hourlyMatch) return hourlyMatch[0].replace(/\s+/g, '');
-  if (yearlyMatch) return yearlyMatch[0].replace(/\s+/g, '');
-  return '';
-}
-
 main();
