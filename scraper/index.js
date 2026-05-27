@@ -1,10 +1,14 @@
 import { chromium } from 'playwright';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Configuration
 const PAYCOM_URL = 'https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/career-page';
 const PAYCOM_CLIENT_KEY = '94B3CAF17B7DBAF1453DBE44CECB7C13';
-const JSONBIN_BIN_ID = process.env.JSONBIN_BIN_ID;
-const JSONBIN_API_KEY = process.env.JSONBIN_API_KEY;
+const JOBS_FILE = join(__dirname, '..', 'jobs.json');
 
 // Department inference from job titles
 const DEPARTMENT_MAP = [
@@ -239,54 +243,26 @@ async function scrapePaycom() {
   }
 }
 
-async function getExistingJobs() {
-  if (!JSONBIN_BIN_ID || !JSONBIN_API_KEY) {
-    console.log('JSONbin credentials not set, skipping fetch of existing jobs');
+function getExistingJobs() {
+  if (!existsSync(JOBS_FILE)) {
+    console.log('No existing jobs.json found, starting fresh');
     return null;
   }
 
   try {
-    const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_API_KEY }
-    });
-
-    if (!response.ok) {
-      console.log('Could not fetch existing jobs:', response.status);
-      return null;
-    }
-
-    const data = await response.json();
-    return data.record || data;
+    const data = JSON.parse(readFileSync(JOBS_FILE, 'utf-8'));
+    console.log(`Loaded ${data.jobs?.length || 0} existing jobs from jobs.json`);
+    return data;
   } catch (error) {
-    console.log('Error fetching existing jobs:', error.message);
+    console.log('Error reading existing jobs:', error.message);
     return null;
   }
 }
 
-async function updateJsonbin(jobsData) {
-  if (!JSONBIN_BIN_ID || !JSONBIN_API_KEY) {
-    console.log('\n⚠️  JSONbin credentials not set. Output:');
-    console.log(JSON.stringify(jobsData, null, 2));
-    return false;
-  }
-
-  console.log('Updating JSONbin...');
-
-  const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Master-Key': JSONBIN_API_KEY
-    },
-    body: JSON.stringify(jobsData)
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`JSONbin update failed: ${response.status} - ${errorText}`);
-  }
-
-  console.log('JSONbin updated successfully!');
+function saveJobsFile(jobsData) {
+  console.log(`Writing ${jobsData.jobs.length} jobs to jobs.json...`);
+  writeFileSync(JOBS_FILE, JSON.stringify(jobsData, null, 2));
+  console.log('jobs.json saved successfully!');
   return true;
 }
 
@@ -306,7 +282,7 @@ async function main() {
     }
 
     // Get existing jobs to preserve featured flags
-    const existing = await getExistingJobs();
+    const existing = getExistingJobs();
     const existingJobsMap = new Map();
 
     if (existing?.jobs) {
@@ -369,8 +345,8 @@ async function main() {
       });
     }
 
-    // Update JSONbin
-    await updateJsonbin(jobsData);
+    // Save to local file (GitHub Actions will commit and push)
+    saveJobsFile(jobsData);
 
     console.log('\n✅ Scraper completed successfully!');
     console.log('='.repeat(50));
