@@ -187,7 +187,11 @@ async function scrapePaycom() {
         let summary = '';
         const summaryMatch = bodyText.match(/Job Summary[:\s]*([^]*?)(?:Qualifications|Requirements|About|Benefits|$)/i);
         if (summaryMatch) {
-          summary = summaryMatch[1].trim().slice(0, 450);
+          // Clean up whitespace and get more text
+          summary = summaryMatch[1]
+            .replace(/\s+/g, ' ')  // Normalize whitespace
+            .trim()
+            .slice(0, 800);  // Longer summary
         }
 
         console.log(`  Title: ${title}`);
