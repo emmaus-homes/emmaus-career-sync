@@ -183,38 +183,18 @@ async function scrapePaycom() {
         const jobType = parseJobType(bodyText);
         const salary = parseSalary(bodyText);
 
-        // Extract summary - look for job description content
-        let summary = '';
-        // Try multiple patterns to find the best description
-        const patterns = [
-          /Job Summary[:\s]*([^]*?)(?:Qualifications|Requirements|$)/i,
-          /Description[:\s]*([^]*?)(?:Qualifications|Requirements|$)/i,
-          /About this (?:role|position|job)[:\s]*([^]*?)(?:Qualifications|Requirements|$)/i
-        ];
-
-        for (const pattern of patterns) {
-          const match = bodyText.match(pattern);
-          if (match && match[1] && match[1].trim().length > summary.length) {
-            summary = match[1]
-              .replace(/\s+/g, ' ')
-              .replace(/Emmaus Core Values.*?Collaboration\./i, '')  // Remove boilerplate
-              .trim();
-          }
-        }
-
-        // If still short, just grab a chunk of text after the title
-        if (summary.length < 200) {
-          const titleIndex = bodyText.indexOf(title);
-          if (titleIndex > -1) {
-            summary = bodyText
-              .slice(titleIndex + title.length, titleIndex + title.length + 1500)
-              .replace(/\s+/g, ' ')
-              .replace(/Emmaus Core Values.*?Collaboration\./i, '')
-              .trim();
-          }
-        }
-
-        summary = summary.slice(0, 1000);
+        // Extract summary - grab all meaningful content from the page
+        let summary = bodyText
+          .replace(/\s+/g, ' ')  // Normalize whitespace
+          .replace(/.*?(The |This |Responsible |Under |As a )/i, '$1')  // Start from first sentence
+          .replace(/Emmaus Core Values.*?Collaboration\.\s*/gi, '')  // Remove boilerplate
+          .replace(/Core Values:.*?Collaboration\.\s*/gi, '')
+          .replace(/All employees are expected to.*?\./gi, '')
+          .replace(/Apply Now.*$/i, '')  // Remove footer stuff
+          .replace(/Back to.*$/i, '')
+          .replace(/Share this.*$/i, '')
+          .trim()
+          .slice(0, 1200);  // Get more content
 
         console.log(`  Title: ${title}`);
         console.log(`  Location: ${location}`);
