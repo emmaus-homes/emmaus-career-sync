@@ -187,7 +187,7 @@ async function scrapePaycom() {
         let summary = '';
         const summaryMatch = bodyText.match(/Job Summary[:\s]*([^]*?)(?:Qualifications|Requirements|About|Benefits|$)/i);
         if (summaryMatch) {
-          summary = summaryMatch[1].trim().slice(0, 250);
+          summary = summaryMatch[1].trim().slice(0, 450);
         }
 
         console.log(`  Title: ${title}`);
