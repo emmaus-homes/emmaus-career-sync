@@ -183,16 +183,38 @@ async function scrapePaycom() {
         const jobType = parseJobType(bodyText);
         const salary = parseSalary(bodyText);
 
-        // Extract summary - look for "Job Summary" section
+        // Extract summary - look for job description content
         let summary = '';
-        const summaryMatch = bodyText.match(/Job Summary[:\s]*([^]*?)(?:Qualifications|Requirements|About|Benefits|$)/i);
-        if (summaryMatch) {
-          // Clean up whitespace and get more text
-          summary = summaryMatch[1]
-            .replace(/\s+/g, ' ')  // Normalize whitespace
-            .trim()
-            .slice(0, 1000);  // Longer summary
+        // Try multiple patterns to find the best description
+        const patterns = [
+          /Job Summary[:\s]*([^]*?)(?:Qualifications|Requirements|$)/i,
+          /Description[:\s]*([^]*?)(?:Qualifications|Requirements|$)/i,
+          /About this (?:role|position|job)[:\s]*([^]*?)(?:Qualifications|Requirements|$)/i
+        ];
+
+        for (const pattern of patterns) {
+          const match = bodyText.match(pattern);
+          if (match && match[1] && match[1].trim().length > summary.length) {
+            summary = match[1]
+              .replace(/\s+/g, ' ')
+              .replace(/Emmaus Core Values.*?Collaboration\./i, '')  // Remove boilerplate
+              .trim();
+          }
         }
+
+        // If still short, just grab a chunk of text after the title
+        if (summary.length < 200) {
+          const titleIndex = bodyText.indexOf(title);
+          if (titleIndex > -1) {
+            summary = bodyText
+              .slice(titleIndex + title.length, titleIndex + title.length + 1500)
+              .replace(/\s+/g, ' ')
+              .replace(/Emmaus Core Values.*?Collaboration\./i, '')
+              .trim();
+          }
+        }
+
+        summary = summary.slice(0, 1000);
 
         console.log(`  Title: ${title}`);
         console.log(`  Location: ${location}`);
