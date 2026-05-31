@@ -171,7 +171,7 @@ async function scrapePaycom() {
 
           return {
             title,
-            bodyText: bodyText.slice(0, 2000), // First 2000 chars for parsing
+            bodyText: bodyText.slice(0, 5000), // First 5000 chars for parsing
           };
         });
 
