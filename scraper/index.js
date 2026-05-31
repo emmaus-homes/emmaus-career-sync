@@ -191,7 +191,7 @@ async function scrapePaycom() {
           summary = summaryMatch[1]
             .replace(/\s+/g, ' ')  // Normalize whitespace
             .trim()
-            .slice(0, 800);  // Longer summary
+            .slice(0, 1000);  // Longer summary
         }
 
         console.log(`  Title: ${title}`);
