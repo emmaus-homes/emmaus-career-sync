@@ -1,24 +1,8 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-05-31T15:53:44.426Z",
+  "updated": "2026-06-01T22:22:55.334Z",
   "source": "github-actions-scraper",
   "jobs": [
-    {
-      "id": "EH-292209",
-      "paycomId": "292209",
-      "reqId": "36308",
-      "title": "Training Facilitator",
-      "department": "Training & Education",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-05-27",
-      "featured": false,
-      "summary": "The Quality Education Specialist (QES) will deliver comprehensive training to all new and existing staff members.\n\n \n\nEmmaus Core Values\n\nCore Values: Customer Centered, Integrity, Initiative, and Collaboration.\n\nAll employees are expected to advocat",
-      "description": "",
-      "salary": "$23.50 - $24.50",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/292209"
-    },
     {
       "id": "EH-300338",
       "paycomId": "300338",
@@ -128,7 +112,7 @@
       "featured": false,
       "summary": "The Adaptive Solutions Technician is a skilled tradesperson responsible for completing a variety of accessibility-focused home improvement projects. This role involves hands-on work modifying residential spaces to enhance safety, mobility, and indepe",
       "description": "",
-      "salary": "",
+      "salary": "$31.25 - $31.25",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/309054"
     }
   ]
