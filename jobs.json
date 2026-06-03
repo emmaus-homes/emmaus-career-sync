@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-06-02T21:39:11.715Z",
+  "updated": "2026-06-03T21:40:54.760Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -16,7 +16,7 @@
       "featured": false,
       "summary": "Responsible for managing payments by ensuring all invoices are processed accurately and paid on time in accordance with company policies and procedures. Provide support with payroll data entry, resolve discrepancies, ensure compliance with regulation",
       "description": "",
-      "salary": "",
+      "salary": "$23.50 - $23.50",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/300338"
     },
     {
@@ -32,8 +32,24 @@
       "featured": false,
       "summary": "The Nurse Education Specialist (NES) will deliver comprehensive training to all new and existing staff members. The NES will maintain a current LPN or RN license.\n\n \n\nEmmaus Core Values\n\nCore Values: Customer Centered, Integrity, Initiative, and Coll",
       "description": "",
-      "salary": "$29.00 - $31.25",
+      "salary": "$32.00 - $32.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/293968"
+    },
+    {
+      "id": "EH-309054",
+      "paycomId": "309054",
+      "reqId": "37446",
+      "title": "Home Accessibility Modifications Technician",
+      "department": "General",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-05-27",
+      "featured": false,
+      "summary": "The Adaptive Solutions Technician is a skilled tradesperson responsible for completing a variety of accessibility-focused home improvement projects. This role involves hands-on work modifying residential spaces to enhance safety, mobility, and indepe",
+      "description": "",
+      "salary": "$31.25 - $31.25",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/309054"
     },
     {
       "id": "EH-294010",
@@ -98,22 +114,6 @@
       "description": "",
       "salary": "$19.00 - $21.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/293958"
-    },
-    {
-      "id": "EH-309054",
-      "paycomId": "309054",
-      "reqId": "37446",
-      "title": "Adaptive Solutions Technician - Accessibility Modifications",
-      "department": "General",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-05-27",
-      "featured": false,
-      "summary": "The Adaptive Solutions Technician is a skilled tradesperson responsible for completing a variety of accessibility-focused home improvement projects. This role involves hands-on work modifying residential spaces to enhance safety, mobility, and indepe",
-      "description": "",
-      "salary": "$31.25 - $31.25",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/309054"
     }
   ]
 }
