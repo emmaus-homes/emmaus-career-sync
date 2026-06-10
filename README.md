@@ -1,27 +1,22 @@
 # Emmaus Careers Sync
 
-Automated job scraper for the Emmaus Homes careers page. Syncs job listings from Paycom to JSONbin daily.
+Automated job scraper for the Emmaus Homes careers page. Syncs job listings from Paycom to GitHub daily.
 
 ## How it works
 
 1. **GitHub Actions** runs on a schedule (daily at 6 AM Central)
 2. **Playwright** (headless browser) loads the Paycom careers portal
 3. **Scraper** extracts job details from each listing
-4. **JSONbin** is updated with the latest jobs
-5. **WordPress** fetches from JSONbin to display the careers page
+4. **jobs.json** is committed to this repo
+5. **WordPress** fetches from GitHub raw URL to display the careers page
 
 ## Setup
 
-### 1. Add repository secrets
+### Repository secrets
 
-Go to **Settings → Secrets and variables → Actions** and add:
+**None required** — the repo is public and no external services are used.
 
-| Secret | Description |
-|--------|-------------|
-| `JSONBIN_BIN_ID` | Your JSONbin bin ID (from the URL) |
-| `JSONBIN_API_KEY` | Your JSONbin X-Master-Key |
-
-### 2. Run the workflow
+### Run the workflow
 
 - **Automatic:** Runs daily at 6:00 AM Central Time
 - **Manual:** Go to Actions → "Update Careers Page" → "Run workflow"
@@ -35,6 +30,8 @@ Go to **Settings → Secrets and variables → Actions** and add:
 ├── scraper/
 │   ├── index.js              # Playwright scraper
 │   └── package.json          # Node.js dependencies
+├── careers-elementor.html    # Elementor HTML widget (paste into WordPress)
+├── jobs.json                 # Job listings data (auto-updated)
 └── README.md
 ```
 
@@ -56,10 +53,17 @@ For each job listing:
 ## Smart merging
 
 When updating, the scraper preserves:
-- `featured` flag (manually set in JSONbin)
+- `featured` flag (manually set in jobs.json)
 - `posted` date (original date job was first seen)
 - `schedule` (if manually set)
 - Custom `summary` edits
+
+## Data cleaning
+
+The scraper automatically handles:
+- **"Hot Job" badges** — Paycom adds these to featured listings; stripped from location field
+- **Boilerplate text** — Core values section filtered from summaries
+- **Requisition IDs** — Extracted from title and stored separately
 
 ## Changing the schedule
 
@@ -82,8 +86,8 @@ Paycom may be slow. Try running again.
 ### No jobs found
 The Paycom page structure may have changed. Check the debug screenshot artifact.
 
-### JSONbin update fails
-Verify secrets are set correctly in repository settings.
+### "Hot Job" appearing in locations
+The scraper strips this automatically. If it appears, manually edit jobs.json to remove it.
 
 ## Manual testing
 
@@ -93,11 +97,17 @@ To run locally:
 cd scraper
 npm install
 npx playwright install chromium
-JSONBIN_BIN_ID=your_bin_id JSONBIN_API_KEY=your_key npm run scrape
+npm run scrape
+```
+
+## GitHub raw URL
+
+The WordPress widget fetches jobs from:
+```
+https://raw.githubusercontent.com/emmaus-homes/emmaus-career-sync/main/jobs.json
 ```
 
 ## Related
 
-- **WordPress widget:** Elementor HTML widget that displays jobs from JSONbin
-- **JSONbin:** [jsonbin.io](https://jsonbin.io) — Free JSON hosting with CORS support
+- **WordPress widget:** Elementor HTML widget (`careers-elementor.html`)
 - **Paycom portal:** React SPA with no public API
