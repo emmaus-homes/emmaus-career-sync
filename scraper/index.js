@@ -49,8 +49,10 @@ function parseJobType(text) {
 }
 
 function parseLocation(text) {
+  // Remove "Hot Job" badge text that Paycom adds to featured listings
+  const cleanedText = text.replace(/Hot Job\s*/gi, '');
   // Match "St. Charles, MO 63301" or "City, ST 12345" pattern
-  const match = text.match(/([A-Z][a-zA-Z.\s]+),\s*([A-Z]{2})(?:\s+\d{5})?/);
+  const match = cleanedText.match(/([A-Z][a-zA-Z.\s]+),\s*([A-Z]{2})(?:\s+\d{5})?/);
   if (match) {
     return `${match[1].trim()}, ${match[2]}`;
   }
