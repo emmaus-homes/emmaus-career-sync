@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-06-25T13:15:16.636Z",
+  "updated": "2026-06-26T13:10:32.333Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -39,7 +39,7 @@
       "id": "EH-309054",
       "paycomId": "309054",
       "reqId": "37446",
-      "title": "Home Accessibility Modifications Technician",
+      "title": "Home Modifications Technician",
       "department": "General",
       "location": "St. Charles, MO",
       "type": "Full-Time",
