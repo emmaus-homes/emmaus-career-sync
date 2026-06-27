@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-06-26T13:10:32.333Z",
+  "updated": "2026-06-27T12:08:56.723Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -39,7 +39,7 @@
       "id": "EH-309054",
       "paycomId": "309054",
       "reqId": "37446",
-      "title": "Home Modifications Technician",
+      "title": "Home Modification Carpenter",
       "department": "General",
       "location": "St. Charles, MO",
       "type": "Full-Time",
@@ -48,7 +48,7 @@
       "featured": false,
       "summary": "The Adaptive Solutions Technician is a skilled tradesperson responsible for completing a variety of accessibility-focused home improvement projects. This role involves hands-on work modifying residential spaces to enhance safety, mobility, and indepe",
       "description": "",
-      "salary": "$31.25 - $31.25",
+      "salary": "$31.25 - $33.65",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/309054"
     },
     {
