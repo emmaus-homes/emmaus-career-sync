@@ -196,7 +196,7 @@ async function scrapePaycom() {
           .replace(/Back to.*$/i, '')
           .replace(/Share this.*$/i, '')
           .trim()
-          .slice(0, 1200);  // Get more content
+          .slice(0, 250);  // Limit to 250 chars
 
         console.log(`  Title: ${title}`);
         console.log(`  Location: ${location}`);
