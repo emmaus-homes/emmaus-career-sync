@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-07-01T13:34:01.369Z",
+  "updated": "2026-07-02T12:56:38.495Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -130,22 +130,6 @@
       "description": "",
       "salary": "$19.00 - $21.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/293958"
-    },
-    {
-      "id": "EH-321078",
-      "paycomId": "321078",
-      "reqId": "38230",
-      "title": "Client Benefits Coordinator - Medical",
-      "department": "Administration",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-06-15",
-      "featured": false,
-      "summary": "The Client Benefits Coordinator is responsible for managing and coordinating benefits related to Medicaid, Medicare, and other insurance programs. The coordinator will serve as a liaison between clients, Client Services, Health Services",
-      "description": "",
-      "salary": "$23.50 - $23.50",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/321078"
     },
     {
       "id": "EH-325979",
