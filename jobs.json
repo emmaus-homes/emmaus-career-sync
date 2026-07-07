@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-07-06T14:24:50.862Z",
+  "updated": "2026-07-07T13:18:47.403Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -130,22 +130,6 @@
       "description": "",
       "salary": "$19.00 - $21.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/293958"
-    },
-    {
-      "id": "EH-325979",
-      "paycomId": "325979",
-      "reqId": "38581",
-      "title": "Associate Client Services Manager",
-      "department": "General",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-06-30",
-      "featured": false,
-      "summary": "The Associate Client Services Manager (ACSM) will deliver high quality support to Emmaus clients and staff. The ASCM may assist the Client Services Manager (CSM) in supervising up to 20 staff and generally support up to 12 clients in 2",
-      "description": "",
-      "salary": "$25.00 - $25.00",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/325979"
     }
   ]
 }
