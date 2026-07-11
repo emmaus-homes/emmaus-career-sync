@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-07-10T13:10:54.471Z",
+  "updated": "2026-07-11T11:51:17.499Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -52,20 +52,36 @@
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/325762"
     },
     {
-      "id": "EH-309054",
-      "paycomId": "309054",
-      "reqId": "37446",
+      "id": "EH-329539",
+      "paycomId": "329539",
+      "reqId": "38893",
       "title": "Home Modification Carpenter",
       "department": "General",
       "location": "St. Charles, MO",
       "type": "Full-Time",
       "schedule": "",
-      "posted": "2026-05-27",
+      "posted": "2026-07-11",
       "featured": false,
-      "summary": "The Adaptive Solutions Technician is a skilled tradesperson responsible for completing a variety of accessibility-focused home improvement projects. This role involves hands-on work modifying residential spaces to enhance safety, mobility, and indepe",
+      "summary": "this could be a great fit. We're looking for someone who has strong carpentry and remodeling skills, pays attention to detail, and enjoys seeing a project through from start to finish. Experience with accessibility modifications is not required—we'll",
       "description": "",
-      "salary": "$31.25 - $33.65",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/309054"
+      "salary": "$30.00 - $33.65",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/329539"
+    },
+    {
+      "id": "EH-329529",
+      "paycomId": "329529",
+      "reqId": "38892",
+      "title": "Home Modification Carpenter",
+      "department": "General",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-07-11",
+      "featured": false,
+      "summary": "this could be a great fit. We're looking for someone who has strong carpentry and remodeling skills, pays attention to detail, and enjoys seeing a project through from start to finish. Experience with accessibility modifications is not required—we'll",
+      "description": "",
+      "salary": "$25.00 - $28.50",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/329529"
     },
     {
       "id": "EH-294010",
