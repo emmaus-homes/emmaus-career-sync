@@ -1,24 +1,8 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-07-17T12:07:56.553Z",
+  "updated": "2026-07-18T11:52:43.107Z",
   "source": "github-actions-scraper",
   "jobs": [
-    {
-      "id": "EH-300338",
-      "paycomId": "300338",
-      "reqId": "36859",
-      "title": "Payroll and Accounts Payable Coordinator",
-      "department": "Finance & Administration",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-05-27",
-      "featured": false,
-      "summary": "Responsible for managing payments by ensuring all invoices are processed accurately and paid on time in accordance with company policies and procedures. Provide support with payroll data entry, resolve discrepancies, ensure compliance with regulation",
-      "description": "",
-      "salary": "$23.50 - $23.50",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/300338"
-    },
     {
       "id": "EH-293968",
       "paycomId": "293968",
