@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-07-21T12:23:22.154Z",
+  "updated": "2026-07-22T12:24:45.332Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -130,6 +130,22 @@
       "description": "",
       "salary": "$20.00 - $22.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/293958"
+    },
+    {
+      "id": "EH-333256",
+      "paycomId": "333256",
+      "reqId": "39178",
+      "title": "Chief Strategy Officer",
+      "department": "General",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-07-22",
+      "featured": false,
+      "summary": "The Chief Strategy Officer (CSO) provides executive leadership for organizational strategy, business development, strategic partnerships, growth initiatives, and revenue diversification. The CSO works closely with the CEO and Executive Leadership Tea",
+      "description": "",
+      "salary": "$140,000.00 - $160,000.00",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/333256"
     }
   ]
 }
