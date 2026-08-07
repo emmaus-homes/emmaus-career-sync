@@ -1,24 +1,8 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-08-06T12:55:22.472Z",
+  "updated": "2026-08-07T11:43:33.246Z",
   "source": "github-actions-scraper",
   "jobs": [
-    {
-      "id": "EH-293968",
-      "paycomId": "293968",
-      "reqId": "36434",
-      "title": "LPN/RN - Level 1 Med Aide Instructor",
-      "department": "Training & Education",
-      "location": "St. Charles, MO",
-      "type": "Full-Time/Part-Time",
-      "schedule": "",
-      "posted": "2026-05-27",
-      "featured": false,
-      "summary": "The Nurse Education Specialist (NES) will deliver comprehensive training to all new and existing staff members. The NES will maintain a current LPN or RN license.\n\n \n\nEmmaus Core Values\n\nCore Values: Customer Centered, Integrity, Initiative, and Coll",
-      "description": "",
-      "salary": "$32.00 - $32.00",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/293968"
-    },
     {
       "id": "EH-325762",
       "paycomId": "325762",
