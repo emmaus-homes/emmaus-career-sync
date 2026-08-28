@@ -1,8 +1,24 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-08-27T20:54:50.162Z",
+  "updated": "2026-08-28T21:19:51.421Z",
   "source": "github-actions-scraper",
   "jobs": [
+    {
+      "id": "EH-346515",
+      "paycomId": "346515",
+      "reqId": "40210",
+      "title": "Training Facilitator - Quality Education Specialist",
+      "department": "Training & Education",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-08-28",
+      "featured": false,
+      "summary": "The Quality Education Specialist (QES) will deliver comprehensive training to all new and existing staff members.  Key Responsibilities Deliver clear, effective, high-quality training to new hires and existing team members. Instruct First Aid, CPR, D",
+      "description": "",
+      "salary": "$23.50 - $24.50",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/346515"
+    },
     {
       "id": "EH-325762",
       "paycomId": "325762",
@@ -50,6 +66,22 @@
       "description": "",
       "salary": "$25.00 - $28.50",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/329529"
+    },
+    {
+      "id": "EH-346528",
+      "paycomId": "346528",
+      "reqId": "40212",
+      "title": "Facilities Manager - Residential Maintenance",
+      "department": "Facilities",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-08-28",
+      "featured": false,
+      "summary": "The Facilities Manager oversees and coordinates the work of Maintenance Technicians across multiple client homes and the main office ensuring the timely and effective completion of general maintenance tasks in areas such as plumbing, carpentry, paint",
+      "description": "",
+      "salary": "$33.66 - $33.66",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/346528"
     },
     {
       "id": "EH-294010",
@@ -130,22 +162,6 @@
       "description": "",
       "salary": "$20.00 - $20.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/339549"
-    },
-    {
-      "id": "EH-333256",
-      "paycomId": "333256",
-      "reqId": "39178",
-      "title": "Chief Strategy Officer",
-      "department": "General",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-07-22",
-      "featured": false,
-      "summary": "The Chief Strategy Officer (CSO) provides executive leadership for organizational strategy, business development, strategic partnerships, growth initiatives, and revenue diversification. The CSO works closely with the CEO and Executive Leadership Tea",
-      "description": "",
-      "salary": "$140,000.00 - $160,000.00",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/333256"
     }
   ]
 }
