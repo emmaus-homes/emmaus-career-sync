@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-09-01T15:23:44.188Z",
+  "updated": "2026-09-02T14:58:36.219Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -50,22 +50,6 @@
       "description": "",
       "salary": "$30.00 - $33.65",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/329539"
-    },
-    {
-      "id": "EH-329529",
-      "paycomId": "329529",
-      "reqId": "38892",
-      "title": "Home Modification Carpenter",
-      "department": "General",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-07-11",
-      "featured": false,
-      "summary": "this could be a great fit. We're looking for someone who has strong carpentry and remodeling skills, pays attention to detail, and enjoys seeing a project through from start to finish. Experience with accessibility modifications is not required—we'll",
-      "description": "",
-      "salary": "$25.00 - $28.50",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/329529"
     },
     {
       "id": "EH-346528",
@@ -162,6 +146,22 @@
       "description": "",
       "salary": "$20.00 - $20.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/339549"
+    },
+    {
+      "id": "EH-333256",
+      "paycomId": "333256",
+      "reqId": "39178",
+      "title": "Chief Strategy Officer",
+      "department": "General",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-09-02",
+      "featured": false,
+      "summary": "The Chief Strategy Officer (CSO) provides executive leadership for organizational strategy, business development, strategic partnerships, growth initiatives, and revenue diversification. The CSO works closely with the CEO and Executive Leadership Tea",
+      "description": "",
+      "salary": "$140,000.00 - $160,000.00",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/333256"
     }
   ]
 }
