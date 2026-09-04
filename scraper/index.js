@@ -124,18 +124,78 @@ async function scrapePaycom() {
     // Extract job data by clicking into each job detail page
     console.log('Extracting job data...');
 
-    // First, get all unique job IDs from the page
-    const jobIds = await page.evaluate(() => {
-      const links = document.querySelectorAll('a[href*="/jobs/"]');
-      const ids = new Set();
-      links.forEach(link => {
-        const match = link.href.match(/\/jobs\/(\d+)/);
-        if (match) ids.add(match[1]);
-      });
-      return [...ids];
-    });
+    // Collect all job IDs across all pages (pagination support)
+    const allJobIds = new Set();
+    let pageNum = 1;
+    const maxPages = 50; // Safety limit
 
-    console.log(`Found ${jobIds.length} unique job IDs: ${jobIds.join(', ')}`);
+    while (pageNum <= maxPages) {
+      console.log(`Scanning page ${pageNum} for job IDs...`);
+
+      // Get job IDs from current page
+      const pageJobIds = await page.evaluate(() => {
+        const links = document.querySelectorAll('a[href*="/jobs/"]');
+        const ids = [];
+        links.forEach(link => {
+          const match = link.href.match(/\/jobs\/(\d+)/);
+          if (match) ids.push(match[1]);
+        });
+        return ids;
+      });
+
+      // Add to collection
+      const newIds = pageJobIds.filter(id => !allJobIds.has(id));
+      newIds.forEach(id => allJobIds.add(id));
+      console.log(`  Found ${pageJobIds.length} job links, ${newIds.length} new IDs`);
+
+      // Check for Next button
+      const hasNextPage = await page.evaluate(() => {
+        const buttons = document.querySelectorAll('button, a');
+        for (const btn of buttons) {
+          const text = btn.textContent?.trim().toLowerCase();
+          const ariaLabel = btn.getAttribute('aria-label')?.toLowerCase() || '';
+          const isDisabled = btn.disabled || btn.classList.contains('disabled') || btn.getAttribute('aria-disabled') === 'true';
+
+          if ((text === 'next' || text === '>' || text === '→' || ariaLabel.includes('next')) && !isDisabled) {
+            return true;
+          }
+        }
+        return false;
+      });
+
+      if (!hasNextPage) {
+        console.log('  No more pages available');
+        break;
+      }
+
+      // Click Next button
+      const clicked = await page.evaluate(() => {
+        const buttons = document.querySelectorAll('button, a');
+        for (const btn of buttons) {
+          const text = btn.textContent?.trim().toLowerCase();
+          const ariaLabel = btn.getAttribute('aria-label')?.toLowerCase() || '';
+          const isDisabled = btn.disabled || btn.classList.contains('disabled') || btn.getAttribute('aria-disabled') === 'true';
+
+          if ((text === 'next' || text === '>' || text === '→' || ariaLabel.includes('next')) && !isDisabled) {
+            btn.click();
+            return true;
+          }
+        }
+        return false;
+      });
+
+      if (!clicked) {
+        console.log('  Could not click Next button');
+        break;
+      }
+
+      // Wait for page to update
+      await page.waitForTimeout(2000);
+      pageNum++;
+    }
+
+    const jobIds = [...allJobIds];
+    console.log(`\nFound ${jobIds.length} total unique job IDs across ${pageNum} page(s): ${jobIds.join(', ')}`);
 
     const jobs = [];
 
