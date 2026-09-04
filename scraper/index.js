@@ -148,15 +148,50 @@ async function scrapePaycom() {
       newIds.forEach(id => allJobIds.add(id));
       console.log(`  Found ${pageJobIds.length} job links, ${newIds.length} new IDs`);
 
-      // Check for Next button
+      // Debug: Log all buttons/links on the page to find pagination
+      const pageButtons = await page.evaluate(() => {
+        const buttons = document.querySelectorAll('button, a, [role="button"]');
+        const buttonInfo = [];
+        buttons.forEach(btn => {
+          const text = btn.textContent?.trim().slice(0, 50);
+          const ariaLabel = btn.getAttribute('aria-label') || '';
+          const className = btn.className || '';
+          const isDisabled = btn.disabled || btn.classList.contains('disabled');
+          // Only log buttons that might be pagination-related
+          if (text && (
+            text.match(/^[\d<>→←]|next|prev|page/i) ||
+            ariaLabel.match(/next|prev|page/i) ||
+            className.match(/pag|next|prev/i)
+          )) {
+            buttonInfo.push({ text, ariaLabel, className: className.slice(0, 50), isDisabled });
+          }
+        });
+        return buttonInfo;
+      });
+
+      if (pageButtons.length > 0) {
+        console.log('  Pagination-related buttons found:', JSON.stringify(pageButtons));
+      }
+
+      // Check for Next button (expanded patterns)
       const hasNextPage = await page.evaluate(() => {
-        const buttons = document.querySelectorAll('button, a');
+        const buttons = document.querySelectorAll('button, a, [role="button"], span[class*="page"], div[class*="page"]');
         for (const btn of buttons) {
           const text = btn.textContent?.trim().toLowerCase();
           const ariaLabel = btn.getAttribute('aria-label')?.toLowerCase() || '';
+          const className = btn.className?.toLowerCase() || '';
           const isDisabled = btn.disabled || btn.classList.contains('disabled') || btn.getAttribute('aria-disabled') === 'true';
 
-          if ((text === 'next' || text === '>' || text === '→' || ariaLabel.includes('next')) && !isDisabled) {
+          // Match various Next button patterns
+          if (!isDisabled && (
+            text === 'next' ||
+            text === '>' ||
+            text === '→' ||
+            text === '>>' ||
+            text === 'next page' ||
+            ariaLabel.includes('next') ||
+            className.includes('next')
+          )) {
             return true;
           }
         }
@@ -168,15 +203,25 @@ async function scrapePaycom() {
         break;
       }
 
-      // Click Next button
+      // Click Next button (expanded patterns)
       const clicked = await page.evaluate(() => {
-        const buttons = document.querySelectorAll('button, a');
+        const buttons = document.querySelectorAll('button, a, [role="button"], span[class*="page"], div[class*="page"]');
         for (const btn of buttons) {
           const text = btn.textContent?.trim().toLowerCase();
           const ariaLabel = btn.getAttribute('aria-label')?.toLowerCase() || '';
+          const className = btn.className?.toLowerCase() || '';
           const isDisabled = btn.disabled || btn.classList.contains('disabled') || btn.getAttribute('aria-disabled') === 'true';
 
-          if ((text === 'next' || text === '>' || text === '→' || ariaLabel.includes('next')) && !isDisabled) {
+          // Match various Next button patterns
+          if (!isDisabled && (
+            text === 'next' ||
+            text === '>' ||
+            text === '→' ||
+            text === '>>' ||
+            text === 'next page' ||
+            ariaLabel.includes('next') ||
+            className.includes('next')
+          )) {
             btn.click();
             return true;
           }
