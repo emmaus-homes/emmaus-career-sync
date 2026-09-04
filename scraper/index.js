@@ -148,89 +148,51 @@ async function scrapePaycom() {
       newIds.forEach(id => allJobIds.add(id));
       console.log(`  Found ${pageJobIds.length} job links, ${newIds.length} new IDs`);
 
-      // Debug: Log all buttons/links on the page to find pagination
-      const pageButtons = await page.evaluate(() => {
+      // Find pagination buttons (Paycom uses numbered buttons: 1, 2, 3...)
+      const paginationInfo = await page.evaluate(() => {
         const buttons = document.querySelectorAll('button, a, [role="button"]');
-        const buttonInfo = [];
+        const pageNumbers = [];
         buttons.forEach(btn => {
-          const text = btn.textContent?.trim().slice(0, 50);
-          const ariaLabel = btn.getAttribute('aria-label') || '';
-          const className = btn.className || '';
-          const isDisabled = btn.disabled || btn.classList.contains('disabled');
-          // Only log buttons that might be pagination-related
-          if (text && (
-            text.match(/^[\d<>→←]|next|prev|page/i) ||
-            ariaLabel.match(/next|prev|page/i) ||
-            className.match(/pag|next|prev/i)
-          )) {
-            buttonInfo.push({ text, ariaLabel, className: className.slice(0, 50), isDisabled });
+          const text = btn.textContent?.trim();
+          // Look for single digit or small number buttons (page numbers)
+          if (text && /^\d+$/.test(text) && parseInt(text) <= 100) {
+            pageNumbers.push({
+              pageNum: parseInt(text),
+              element: btn
+            });
           }
         });
-        return buttonInfo;
+        // Sort by page number and return just the numbers found
+        return pageNumbers.map(p => p.pageNum).sort((a, b) => a - b);
       });
 
-      if (pageButtons.length > 0) {
-        console.log('  Pagination-related buttons found:', JSON.stringify(pageButtons));
-      }
+      console.log(`  Pagination buttons found: [${paginationInfo.join(', ')}]`);
 
-      // Check for Next button (expanded patterns)
-      const hasNextPage = await page.evaluate(() => {
-        const buttons = document.querySelectorAll('button, a, [role="button"], span[class*="page"], div[class*="page"]');
-        for (const btn of buttons) {
-          const text = btn.textContent?.trim().toLowerCase();
-          const ariaLabel = btn.getAttribute('aria-label')?.toLowerCase() || '';
-          const className = btn.className?.toLowerCase() || '';
-          const isDisabled = btn.disabled || btn.classList.contains('disabled') || btn.getAttribute('aria-disabled') === 'true';
-
-          // Match various Next button patterns
-          if (!isDisabled && (
-            text === 'next' ||
-            text === '>' ||
-            text === '→' ||
-            text === '>>' ||
-            text === 'next page' ||
-            ariaLabel.includes('next') ||
-            className.includes('next')
-          )) {
-            return true;
-          }
-        }
-        return false;
-      });
+      // Check if there's a next page number to click
+      const nextPageNum = pageNum + 1;
+      const hasNextPage = paginationInfo.includes(nextPageNum);
 
       if (!hasNextPage) {
         console.log('  No more pages available');
         break;
       }
 
-      // Click Next button (expanded patterns)
-      const clicked = await page.evaluate(() => {
-        const buttons = document.querySelectorAll('button, a, [role="button"], span[class*="page"], div[class*="page"]');
+      // Click the next page number button
+      console.log(`  Clicking page ${nextPageNum}...`);
+      const clicked = await page.evaluate((targetPage) => {
+        const buttons = document.querySelectorAll('button, a, [role="button"]');
         for (const btn of buttons) {
-          const text = btn.textContent?.trim().toLowerCase();
-          const ariaLabel = btn.getAttribute('aria-label')?.toLowerCase() || '';
-          const className = btn.className?.toLowerCase() || '';
-          const isDisabled = btn.disabled || btn.classList.contains('disabled') || btn.getAttribute('aria-disabled') === 'true';
-
-          // Match various Next button patterns
-          if (!isDisabled && (
-            text === 'next' ||
-            text === '>' ||
-            text === '→' ||
-            text === '>>' ||
-            text === 'next page' ||
-            ariaLabel.includes('next') ||
-            className.includes('next')
-          )) {
+          const text = btn.textContent?.trim();
+          if (text === String(targetPage)) {
             btn.click();
             return true;
           }
         }
         return false;
-      });
+      }, nextPageNum);
 
       if (!clicked) {
-        console.log('  Could not click Next button');
+        console.log(`  Could not click page ${nextPageNum} button`);
         break;
       }
 
