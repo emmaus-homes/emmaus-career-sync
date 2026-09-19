@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-09-18T14:47:21.965Z",
+  "updated": "2026-09-19T14:10:08.061Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -34,22 +34,6 @@
       "description": "",
       "salary": "$105,000.00 - $110,000.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/350088"
-    },
-    {
-      "id": "EH-325762",
-      "paycomId": "325762",
-      "reqId": "38567",
-      "title": "Human Resources Generalist",
-      "department": "Human Resources",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-06-30",
-      "featured": false,
-      "summary": "The Human Resources Generalist supports the HR function within a mission-driven nonprofit organization that provides services to individuals with developmental disabilities. This role helps ensure a supportive, person-centered work en",
-      "description": "",
-      "salary": "$32.00 - $34.00",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/325762"
     },
     {
       "id": "EH-346528",
