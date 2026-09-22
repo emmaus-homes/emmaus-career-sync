@@ -1,24 +1,8 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-09-21T16:47:25.339Z",
+  "updated": "2026-09-22T15:25:39.106Z",
   "source": "github-actions-scraper",
   "jobs": [
-    {
-      "id": "EH-346515",
-      "paycomId": "346515",
-      "reqId": "40210",
-      "title": "Training Facilitator - Quality Education Specialist",
-      "department": "Training & Education",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-08-28",
-      "featured": false,
-      "summary": "The Quality Education Specialist (QES) will deliver comprehensive training to all new and existing staff members.  Key Responsibilities Deliver clear, effective, high-quality training to new hires and existing team members. Instruct First Aid, CPR, D",
-      "description": "",
-      "salary": "$23.50 - $24.50",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/346515"
-    },
     {
       "id": "EH-350088",
       "paycomId": "350088",
