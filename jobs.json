@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-10-04T15:39:42.905Z",
+  "updated": "2026-10-05T19:31:06.928Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -114,6 +114,22 @@
       "description": "",
       "salary": "$20.00 - $20.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/339549"
+    },
+    {
+      "id": "EH-356124",
+      "paycomId": "356124",
+      "reqId": "41166",
+      "title": "Compliance and Operations Specialist",
+      "department": "General",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-10-05",
+      "featured": false,
+      "summary": "The Compliance and Operations Specialist provides administrative, marketing, and operational support for compliance training, learning systems, facility rentals, customer engagement, and reporting. This role coordinates records, communications, logis",
+      "description": "",
+      "salary": "$24.00 - $26.45",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/356124"
     },
     {
       "id": "EH-333256",
