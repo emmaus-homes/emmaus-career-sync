@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-10-05T19:31:06.928Z",
+  "updated": "2026-10-06T17:03:26.027Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -18,22 +18,6 @@
       "description": "",
       "salary": "$105,000.00 - $110,000.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/350088"
-    },
-    {
-      "id": "EH-346528",
-      "paycomId": "346528",
-      "reqId": "40212",
-      "title": "Facilities Manager - Residential Maintenance",
-      "department": "Facilities",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-08-28",
-      "featured": false,
-      "summary": "The Facilities Manager oversees and coordinates the work of Maintenance Technicians across multiple client homes and the main office ensuring the timely and effective completion of general maintenance tasks in areas such as plumbing, carpentry, paint",
-      "description": "",
-      "salary": "$33.66 - $33.66",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/346528"
     },
     {
       "id": "EH-294010",
