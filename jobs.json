@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-10-27T16:11:51.526Z",
+  "updated": "2026-10-28T16:59:03.167Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -34,6 +34,22 @@
       "description": "",
       "salary": "$28.00 - $29.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/359652"
+    },
+    {
+      "id": "EH-354664",
+      "paycomId": "354664",
+      "reqId": "40953",
+      "title": "Home Modification Carpenter",
+      "department": "General",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-09-26",
+      "featured": false,
+      "summary": "The Adaptive Solutions Technician performs residential remodeling, carpentry, and construction projects designed to improve accessibility, safety, and independence for individuals with disabilities. This role is responsible for completing home modifi",
+      "description": "",
+      "salary": "$25.00 - $28.50",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/354664"
     },
     {
       "id": "EH-294010",
@@ -114,22 +130,6 @@
       "description": "",
       "salary": "$24.00 - $26.45",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/356124"
-    },
-    {
-      "id": "EH-354664",
-      "paycomId": "354664",
-      "reqId": "40953",
-      "title": "Adaptive Solutions Technician",
-      "department": "General",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-09-26",
-      "featured": false,
-      "summary": "The Adaptive Solutions Technician performs residential remodeling, carpentry, and construction projects designed to improve accessibility, safety, and independence for individuals with disabilities. This role is responsible for completing home modifi",
-      "description": "",
-      "salary": "$25.00 - $28.50",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/354664"
     }
   ]
 }
