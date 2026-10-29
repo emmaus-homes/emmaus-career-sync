@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-10-28T16:59:03.167Z",
+  "updated": "2026-10-29T17:18:44.461Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -34,6 +34,22 @@
       "description": "",
       "salary": "$28.00 - $29.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/359652"
+    },
+    {
+      "id": "EH-360467",
+      "paycomId": "360467",
+      "reqId": "41692",
+      "title": "Home Modification Carpenter",
+      "department": "General",
+      "location": "St. Charles, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-10-29",
+      "featured": false,
+      "summary": "this could be a great fit. We're looking for someone who has strong carpentry and remodeling skills, pays attention to detail, and enjoys seeing a project through from start to finish. Experience with accessibility modifications is not required—we'll",
+      "description": "",
+      "salary": "$30.00 - $33.65",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/360467"
     },
     {
       "id": "EH-354664",
