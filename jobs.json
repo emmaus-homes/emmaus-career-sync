@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-11-04T18:27:22.214Z",
+  "updated": "2026-11-06T17:48:49.190Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -34,6 +34,22 @@
       "description": "",
       "salary": "$28.00 - $29.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/359652"
+    },
+    {
+      "id": "EH-362109",
+      "paycomId": "362109",
+      "reqId": "41907",
+      "title": "LPN/RN - Level 1 Med Aide Instructor - PRN",
+      "department": "Training & Education",
+      "location": "St. Charles, MO",
+      "type": "Part-Time",
+      "schedule": "",
+      "posted": "2026-11-06",
+      "featured": false,
+      "summary": "The Nurse Education Specialist (NES) will deliver comprehensive training to all new and existing staff members. The NES will maintain a current LPN or RN license.  Key Responsibilities Deliver clear, effective, high-quality training to new hires and ",
+      "description": "",
+      "salary": "$32.00 - $32.00",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/362109"
     },
     {
       "id": "EH-360467",
