@@ -1,24 +1,8 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-11-09T21:17:47.267Z",
+  "updated": "2026-11-10T18:28:39.343Z",
   "source": "github-actions-scraper",
   "jobs": [
-    {
-      "id": "EH-350088",
-      "paycomId": "350088",
-      "reqId": "40505",
-      "title": "Manager of Health Services",
-      "department": "General",
-      "location": "St. Charles, MO",
-      "type": "Full-Time",
-      "schedule": "",
-      "posted": "2026-09-09",
-      "featured": false,
-      "summary": "The Manager of Health Services provides strategic and operational leadership for Emmaus Homes' nursing oversight and health services functions. This role is responsible for supervising and developing RN Case Managers, establishing and improving nursi",
-      "description": "",
-      "salary": "$105,000.00 - $110,000.00",
-      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/350088"
-    },
     {
       "id": "EH-359652",
       "paycomId": "359652",
