@@ -1,6 +1,6 @@
 {
   "organization": "Emmaus Homes",
-  "updated": "2026-11-24T20:59:57.569Z",
+  "updated": "2026-11-25T20:22:14.643Z",
   "source": "github-actions-scraper",
   "jobs": [
     {
@@ -98,6 +98,22 @@
       "description": "",
       "salary": "$20.00 - $22.00",
       "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/293958"
+    },
+    {
+      "id": "EH-365397",
+      "paycomId": "365397",
+      "reqId": "42285",
+      "title": "Direct Support Professional - 7 Days On, 7 Days Off",
+      "department": "Direct Support",
+      "location": "Marthasville, MO",
+      "type": "Full-Time",
+      "schedule": "",
+      "posted": "2026-11-25",
+      "featured": false,
+      "summary": "This is a unique opportunity to make at least $65,000 over the span of a year working only half the year. You will work 7 days and then be off the next 7 days. This cycle will repeat. During your 7 days in the home, you will have a separate sleeping ",
+      "description": "",
+      "salary": "$20.00 - $20.00",
+      "applyUrl": "https://www.paycomonline.net/v4/ats/web.php/portal/94B3CAF17B7DBAF1453DBE44CECB7C13/jobs/365397"
     }
   ]
 }
